@@ -80,7 +80,7 @@ $(function(){
         url:urlParts.href
 
       },
-      url: "http://html2canvas.appspot.com/query",
+      url: "https://html2canvas.appspot.com/query",
       dataType: "jsonp",
       success: function(html){
         iframe = document.createElement('iframe');
