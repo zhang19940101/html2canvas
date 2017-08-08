@@ -1,10 +1,8 @@
 <!doctype html>
-<html ng-app="site">
+<html>
   <head>
-    <title ng-bind="title">html2canvas</title>
+    <title>html2canvas - Documentation</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
-    <script src="/site/site.js"></script>
 
     <base href="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +10,324 @@
     <meta name="author" content="Niklas von Hertzen">
 
     <link href="/site/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      header {
+        height: 50px;
+      }
+      footer {
+        background-color: #333;
+        color: white;
+        padding: 20px 0;
+      }
+      .share {
+        padding-top:5px;
+        margin-bottom:-5px;
+        margin-right: -50px;
+      }
+
+      .page-header, .lead {
+        color: #5A5A5A;
+      }
+      #doc-nav {
+        width: 220px;
+      }
+
+      #doc-nav .active a {
+        background-color: #08C;
+        color: #fff;
+        border-color: #08C;
+      }
+
+      html {
+        overflow-y: scroll;
+      }
+
+      .com { color: #93a1a1; }
+      .lit { color: #195f91; }
+      .pun, .opn, .clo { color: #93a1a1; }
+      .fun { color: #dc322f; }
+      .str, .atv { color: #D14; }
+      .kwd, .prettyprint .tag { color: #1e347b; }
+      .typ, .atn, .dec, .var { color: teal; }
+      .pln { color: #48484c; }
+
+      .prettyprint {
+        padding: 8px;
+        background-color: #f7f7f9;
+        border: 1px solid #e1e1e8;
+      }
+      .prettyprint.linenums {
+        -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+        -moz-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+        box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+      }
+
+      /* Specify class=linenums on a pre to get line numbering */
+      ol.linenums {
+        margin: 0 0 0 33px; /* IE indents via margin-left */
+      }
+      ol.linenums li {
+        padding-left: 12px;
+        color: #bebec5;
+        line-height: 20px;
+        text-shadow: 0 1px 0 #fff;
+      }
+
+    </style>
+    <style>
+      #carbonads {
+        display: block;
+        overflow: hidden;
+        padding: 1em;
+        border: solid 1px #dddddd;
+        border-radius: 4px;
+        background-color: #fafafa;
+        text-align: center;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+
+      #carbonads span {
+        display: block;
+        overflow: hidden;
+      }
+
+      .carbon-img {
+        display: block;
+        margin: 0 auto .5em;
+      }
+
+      .carbon-text {
+        display: block;
+        margin-bottom: .5em;
+      }
+
+      .carbon-poweredby {
+        display: block;
+        color: #222;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 9px;
+        line-height: 1;
+      }
+    </style>
+
   </head>
   <body>
-    <header ng-include="'site/header.html'"></header>
-    <div class="container" ng-view></div>
-    <footer ng-include="'site/footer.html'"></footer>
+  <header>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="index.html">html2canvas</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li><a href="/">Home</a></li>
+            <li class="active"><a href="/documentation.html">Documentation</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+            <li><a href="/examples.html">Examples</a></li>
+            <li><a href="https://github.com/niklasvh/html2canvas/releases" target="_blank">Download</a></li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+  <a href="http://github.com/niklasvh/html2canvas"><img style="position: fixed; top: 0; right: 0; border: 0;z-index:9999;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+  </header>
+    <div class="container">
+      <div class="row-fluid">
+        <div class="span3">
+          <ul class="nav nav-tabs nav-stacked" id="doc-nav"></ul>
+          <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=html2canvashertzencom" id="_carbonads_js"></script>
+
+        </div>
+        <div class="span9">
+          <div class="row-fluid" id="docs">
+            <div class="page-header">
+              <h1>Introduction</h1>
+            </div>
+            <p class="lead">
+              Before you get started with the script, there are a few things that are good to know regarding the script and some of its limitations.
+            </p>
+
+            <h3>How it works</h3>
+            <p>
+              The script traverses through the DOM of the page it is loaded on. It gathers information on all the elements there, which it then uses to build a representation of the page.
+              In other words, it does not actually take a screenshot of the page, but builds a representation of it based on the properties it reads from the DOM.
+            </p>
+            <p>As a result, it is only able to render correctly properties that it understands, meaning there are many CSS properties which do not work.</p>
+
+
+            <h3>Limitations</h3>
+            <p>
+              All the images that the script uses need to reside under the <a href="http://en.wikipedia.org/wiki/Same_origin_policy">same origin</a> for it to be able to read them without the assistance of a <a href="#">proxy</a>.
+              Similarly, if you have other <code>canvas</code> elements on the page, which have been tainted with cross-origin content, they will become dirty and no longer readable by html2canvas.
+            </p>
+
+            <p>
+              The script doesn't render plugin content such as Flash or Java applets. It doesn't render <code>iframe</code> content either.
+            </p>
+
+            <div class="page-header">
+              <h1>Getting started</h1>
+            </div>
+
+            <p>To run html2canvas on an <code>element</code> with some <code>options</code> simply call:</p>
+
+            <pre class="prettyprint linenums">html2canvas(element, options);</pre>
+
+            <p>The rendered <code>canvas</code> is provided in the callback event <code>onrendered</code>, as such:</p>
+
+            <pre class="prettyprint linenums">html2canvas(element, {
+    onrendered: function(canvas) {
+        // canvas is the final rendered &lt;canvas&gt; element
+    }
+});</pre>
+
+            <h3>Available options</h3>
+
+            <p>The options variable is an <code>object</code> which accepts the following parameters:</p>
+            <table class="table table-bordered table-striped">
+              <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Default</th>
+                <th>Description</th>
+
+              </tr>
+              </thead>
+              <tbody>
+
+              <tr>
+                <td>allowTaint</td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Whether to allow cross-origin images to taint the canvas</td>
+              </tr>
+
+              <tr>
+                <td>background</td>
+                <td>string</td>
+                <td>#fff</td>
+                <td>Canvas background color, if none is specified in DOM. Set undefined for transparent</td>
+              </tr>
+
+              <tr>
+                <td>height</td>
+                <td>number</td>
+                <td>null</td>
+                <td>Define the height of the canvas in pixels. If null, renders with full height of the window.</td>
+              </tr>
+
+              <tr>
+                <td>letterRendering</td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Whether to render each letter separately. Necessary if <code>letter-spacing</code> is used.</td>
+              </tr>
+
+              <tr>
+                <td>logging</td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Whether to log events in the console.</td>
+              </tr>
+
+              <tr>
+                <td>proxy</td>
+                <td>string</td>
+                <td>undefined</td>
+                <td>Url to the proxy which is to be used for loading cross-origin images. If left empty, cross-origin images won't be loaded.</td>
+              </tr>
+
+              <tr>
+                <td>taintTest</td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>Whether to test each image if it taints the canvas before drawing them</td>
+              </tr>
+
+              <tr>
+                <td>timeout</td>
+                <td>number</td>
+                <td>0</td>
+                <td>Timeout for loading images, in milliseconds. Setting it to 0 will result in no timeout. </td>
+              </tr>
+
+              <tr>
+                <td>width</td>
+                <td>number</td>
+                <td>null</td>
+                <td>Define the width of the canvas in pixels. If null, renders with full width of the window.</td>
+              </tr>
+
+              <tr>
+                <td>useCORS</td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>Whether to attempt to load cross-origin images as CORS served, before reverting back to proxy</td>
+              </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+
+        </div>
+      </div>
+      <script src="/site/js/prettify.js"></script>
+      <script>
+          (function(){
+              var docNav = $("#doc-nav");
+              $("#docs h1, #docs h2, #docs h3").each(function(i,element){
+                  var $element = $(element);
+                  var id = $element.text().replace(/ /g, "-").toLowerCase();
+
+                  $element.attr('id', id);
+                  docNav.append($('<li />').append($('<a />').text($element.text()).attr('href','#' + id)));
+
+              });
+              $(window).scrollspy({
+                  target: ".span3"
+              });
+              docNav.affix()
+              window.prettyPrint();
+
+          })();
+      </script>
+
+
+    </div>
+  <footer>
+  <div class="container">
+    <p>
+      Created by <a href="http://hertzen.com">Niklas von Hertzen</a> <br />
+      Licensed under the <a href="LICENSE">MIT License</a>. <br />
+      <a href="https://twitter.com/Niklasvh" class="twitter-follow-button" data-show-count="false">Follow @Niklasvh</a>
+    </p>
+
+    <script>
+        var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-188600-10']);_gaq.push(['_trackPageview']);(function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
+
+        (function(d, s, id) {
+            var po = d.createElement(s); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var e = d.getElementsByTagName(s)[0]; e.parentNode.insertBefore(po, e);
+
+            var js;
+            if(!d.getElementById(id)){
+                js=d.createElement(s);
+                js.id=id;
+                js.src="//platform.twitter.com/widgets.js";
+                e.parentNode.insertBefore(js,e);
+            }
+
+        })(document, "script", "twitter-wjs");
+    </script>
+    <script src="//hertzen.com/js/heatmap.min.js"></script>
+  </div>
+  </footer>
+
   </body>
 </html>

@@ -1,21 +1,224 @@
 <!doctype html>
-<html ng-app="site">
-  <head>
-    <title ng-bind="title">html2canvas</title>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
-    <script src="/site/site.js"></script>
+<html>
+<head>
+  <title>html2canvas - Test console</title>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-    <base href="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Screenshot creation with JavaScript">
-    <meta name="author" content="Niklas von Hertzen">
+  <base href="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Screenshot creation with JavaScript">
+  <meta name="author" content="Niklas von Hertzen">
 
-    <link href="/site/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body>
-    <header ng-include="'site/header.html'"></header>
-    <div class="container" ng-view></div>
-    <footer ng-include="'site/footer.html'"></footer>
-  </body>
+  <link href="/site/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    header {
+      height: 50px;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 20px 0;
+    }
+    .share {
+      padding-top:5px;
+      margin-bottom:-5px;
+      margin-right: -50px;
+    }
+
+    .page-header, .lead {
+      color: #5A5A5A;
+    }
+    #doc-nav {
+      width: 220px;
+    }
+
+    #doc-nav .active a {
+      background-color: #08C;
+      color: #fff;
+      border-color: #08C;
+    }
+
+    html {
+      overflow-y: scroll;
+    }
+
+    .com { color: #93a1a1; }
+    .lit { color: #195f91; }
+    .pun, .opn, .clo { color: #93a1a1; }
+    .fun { color: #dc322f; }
+    .str, .atv { color: #D14; }
+    .kwd, .prettyprint .tag { color: #1e347b; }
+    .typ, .atn, .dec, .var { color: teal; }
+    .pln { color: #48484c; }
+
+    .prettyprint {
+      padding: 8px;
+      background-color: #f7f7f9;
+      border: 1px solid #e1e1e8;
+    }
+    .prettyprint.linenums {
+      -webkit-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+      -moz-box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+      box-shadow: inset 40px 0 0 #fbfbfc, inset 41px 0 0 #ececf0;
+    }
+
+    /* Specify class=linenums on a pre to get line numbering */
+    ol.linenums {
+      margin: 0 0 0 33px; /* IE indents via margin-left */
+    }
+    ol.linenums li {
+      padding-left: 12px;
+      color: #bebec5;
+      line-height: 20px;
+      text-shadow: 0 1px 0 #fff;
+    }
+
+  </style>
+  <style>
+    #carbonads {
+      display: block;
+      overflow: hidden;
+      padding: 1em;
+      border: solid 1px #dddddd;
+      border-radius: 4px;
+      background-color: #fafafa;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    #carbonads span {
+      display: block;
+      overflow: hidden;
+    }
+
+    .carbon-img {
+      display: block;
+      margin: 0 auto .5em;
+    }
+
+    .carbon-text {
+      display: block;
+      margin-bottom: .5em;
+    }
+
+    .carbon-poweredby {
+      display: block;
+      color: #222;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 9px;
+      line-height: 1;
+    }
+  </style>
+
+</head>
+<body>
+<header>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="index.html">html2canvas</a>
+        <div class="nav-collapse">
+          <ul class="nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/documentation.html">Documentation</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+            <li><a href="/examples.html">Examples</a></li>
+            <li><a href="https://github.com/niklasvh/html2canvas/releases" target="_blank">Download</a></li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+  <a href="http://github.com/niklasvh/html2canvas"><img style="position: fixed; top: 0; right: 0; border: 0;z-index:9999;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+</header>
+<div class="container">
+  <div class="row-fluid">
+    <div class="span3">
+      <ul class="nav nav-tabs nav-stacked" id="doc-nav"></ul>
+      <script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=html2canvashertzencom" id="_carbonads_js"></script>
+
+    </div>
+    <div class="span9">
+      <script src="/build/html2canvas.js"></script>
+      <script src="/site/console.js"></script>
+
+      <ul class="breadcrumb">
+        <li><a href="/">Home</a> <span class="divider">/</span></li>
+        <li><a href="/examples.html">Examples</a> <span class="divider">/</span></li>
+        <li class="active">Test console</li>
+      </ul>
+
+      <div class="page-header">
+        <h1>JavaScript webpage renderer</h1>
+      </div>
+
+      <p>
+        The whole screenshot is created with JavaScript. The only server interaction that is happening on this page is the proxy for loading the external pages/images into JSONP/CORS enabled page and onwards onto the JavaScript renderer script.
+        There are a lot of problemii s of loading external pages, even with a proxy, and as such many pages will not render at all. If you wish to try the script properly, I recommend you get a copy of the source from <a href="https://github.com/niklasvh/html2canvas">here</a> instead.
+      </p>
+      <form class="well form-search">
+        <label for="url">Website URL:</label>
+        <input type="url" id="url" value="http://www.yahoo.com" class="input-medium search-query" /><button class="btn" id="getscreenshot">Get screenshot!</button>
+      </form>
+
+      <label for="disablejs">Disable JavaScript (recommended, doesn't work well with the proxy)</label> <input type="checkbox" id="disablejs" checked /><br />
+      <small>Tested with Google Chrome 12, Firefox 4 and Opera 11.5</small>
+
+      <h3>Recommended (tested) pages:</h3>
+
+      <ul id="recommended">
+        <li><a href="http://www.twitter.com/niklasvh">twitter.com</a></li>
+        <li><a href="http://www.yahoo.com">yahoo.com</a></li>
+        <li><a href="http://www.jquery.com">jquery.com</a></li>
+        <li><a href="http://www.google.com">google.com</a></li>
+        <li><a href="https://github.com/niklasvh/html2canvas">github.com</a></li>
+        <li><a href="http://www.smashingmagazine.com">smashingmagazine.com</a></li>
+        <li><a href="http://www.mashable.com">mashable.com</a></li>
+        <li><a href="http://www.facebook.com/google">facebook.com/google</a></li>
+        <li><a href="http://www.youtube.com/">youtube.com</a></li>
+        <li><a href="http://www.cnn.com/">cnn.com</a></li>
+        <li><a href="http://www.engadget.com/">engadget.com (lot of elements, very slow)</a></li>
+        <li><a href="http://eu.battle.net/en/">battle.net</a></li>
+      </ul>
+
+      <div id="content"></div>
+
+    </div>
+  </div>
+  <script src="/site/js/prettify.js"></script>
+
+</div>
+<footer>
+  <div class="container">
+    <p>
+      Created by <a href="http://hertzen.com">Niklas von Hertzen</a> <br />
+      Licensed under the <a href="LICENSE">MIT License</a>. <br />
+      <a href="https://twitter.com/Niklasvh" class="twitter-follow-button" data-show-count="false">Follow @Niklasvh</a>
+    </p>
+
+    <script>
+        var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-188600-10']);_gaq.push(['_trackPageview']);(function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
+
+        (function(d, s, id) {
+            var po = d.createElement(s); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/plusone.js';
+            var e = d.getElementsByTagName(s)[0]; e.parentNode.insertBefore(po, e);
+
+            var js;
+            if(!d.getElementById(id)){
+                js=d.createElement(s);
+                js.id=id;
+                js.src="//platform.twitter.com/widgets.js";
+                e.parentNode.insertBefore(js,e);
+            }
+
+        })(document, "script", "twitter-wjs");
+    </script>
+    <script src="//hertzen.com/js/heatmap.min.js"></script>
+  </div>
+</footer>
+</body>
 </html>
