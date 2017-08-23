@@ -1,5 +1,6 @@
 tests/
 examples/
+dist/npm/
 build/
 flow-typed/
 scripts/
