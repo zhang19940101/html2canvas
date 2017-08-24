@@ -63,6 +63,7 @@ var html2canvas = function html2canvas(element, config) {
         scale: defaultView.devicePixelRatio || 1,
         target: new _CanvasRenderer2.default(config.canvas),
         type: null,
+        backgroundColor: config.backgroundColor,
         windowWidth: defaultView.innerWidth,
         windowHeight: defaultView.innerHeight,
         offsetX: defaultView.pageXOffset,
@@ -77,7 +78,7 @@ var html2canvas = function html2canvas(element, config) {
 
     // http://www.w3.org/TR/css3-background/#special-backgrounds
     var documentBackgroundColor = ownerDocument.documentElement ? new _Color2.default(getComputedStyle(ownerDocument.documentElement).backgroundColor) : _Color.TRANSPARENT;
-    var backgroundColor = element === ownerDocument.documentElement ? documentBackgroundColor.isTransparent() ? ownerDocument.body ? new _Color2.default(getComputedStyle(ownerDocument.body).backgroundColor) : null : documentBackgroundColor : null;
+    var backgroundColor = config.backgroundColor || (element === ownerDocument.documentElement ? documentBackgroundColor.isTransparent() ? ownerDocument.body ? new _Color2.default(getComputedStyle(ownerDocument.body).backgroundColor) : null : documentBackgroundColor : null);
 
     // $FlowFixMe
     var result = _Feature2.default.SUPPORT_FOREIGNOBJECT_DRAWING.then(function (supportForeignObject) {
