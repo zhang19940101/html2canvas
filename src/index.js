@@ -25,6 +25,7 @@ export type Options = {
     scale: number,
     target: RenderTarget<*>,
     type: ?string,
+    backgroundColor: ?Color,
     windowWidth: number,
     windowHeight: number,
     offsetX: number,
@@ -50,6 +51,7 @@ const html2canvas = (element: HTMLElement, config: Options): Promise<*> => {
         scale: defaultView.devicePixelRatio || 1,
         target: new CanvasRenderer(config.canvas),
         type: null,
+        backgroundColor: config.backgroundColor,
         windowWidth: defaultView.innerWidth,
         windowHeight: defaultView.innerHeight,
         offsetX: defaultView.pageXOffset,
@@ -71,14 +73,14 @@ const html2canvas = (element: HTMLElement, config: Options): Promise<*> => {
     const documentBackgroundColor = ownerDocument.documentElement
         ? new Color(getComputedStyle(ownerDocument.documentElement).backgroundColor)
         : TRANSPARENT;
-    const backgroundColor =
+    const backgroundColor = config.backgroundColor || (
         element === ownerDocument.documentElement
             ? documentBackgroundColor.isTransparent()
               ? ownerDocument.body
                 ? new Color(getComputedStyle(ownerDocument.body).backgroundColor)
                 : null
               : documentBackgroundColor
-            : null;
+            : null);
 
     // $FlowFixMe
     const result = Feature.SUPPORT_FOREIGNOBJECT_DRAWING.then(
